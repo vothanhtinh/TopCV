@@ -9,6 +9,8 @@ export const handleLoginUser = async (user: any) => {
 };
 
 export const callRegisterUser = async (user: IUser) => {
-  const result = await post('/auth/register', user);
+  const { age, role = 'USER' } = user;
+  const newAge = Number(age);
+  const result = await post('/auth/register', { ...user, age: newAge });
   return result;
 };

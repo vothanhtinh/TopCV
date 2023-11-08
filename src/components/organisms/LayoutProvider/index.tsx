@@ -6,6 +6,9 @@ import { usePathname } from 'next/navigation';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Header from '../Header';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from '@/store/configStore';
 
 const queryClient = new QueryClient();
 
@@ -14,9 +17,13 @@ export const LayoutProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        {pathname !== '/login' && <Header />}
-        {children}
-        <ReactQueryDevtools />
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            {pathname !== '/login' && <Header />}
+            {children}
+            <ReactQueryDevtools />
+          </PersistGate>
+        </Provider>
       </QueryClientProvider>
     </>
   );

@@ -4,25 +4,17 @@ import Link from 'next/link';
 
 // Types
 import { IUser } from '@/app/types/backend';
+import { useRegisterUser } from '@/queries/auth/useRegister';
 
 const { Option } = Select;
 
 const RegisterPage = () => {
+  const { mutation, isLoading } = useRegisterUser();
+
   const onFinish = async (values: IUser) => {
     const { name, email, password, age, gender, address } = values;
-    // // const res = await callRegister(name, email, password as string, +age, gender, address);
-    // setIsSubmit(false);
-    // if (res?.data?._id) {
-    //     message.success('Đăng ký tài khoản thành công!');
-    //     navigate('/login')
-    // } else {
-    //     notification.error({
-    //         message: "Có lỗi xảy ra",
-    //         description:
-    //             res.message && Array.isArray(res.message) ? res.message[0] : res.message,
-    //         duration: 5
-    //     })
-    // }
+
+    await mutation.mutateAsync({ name, email, password, age, gender, address });
   };
 
   return (

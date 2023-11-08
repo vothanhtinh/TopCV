@@ -22,7 +22,7 @@ export default function LoginPage() {
 
   return (
     <section className="w-full flex items-center gap-8  h-screen ">
-      <div className="w-full md:px-5 py-16 flex gap-5 flex-col items-center ">
+      <div className="w-full md:px-5 py-16 flex gap-5 flex-col ">
         <div className="flex gap-5 flex-col">
           <h2 className="text-green-500 font-semibold text-xl">
             Chào mừng bạn đã quay trở lại
@@ -32,7 +32,12 @@ export default function LoginPage() {
             tưởng
           </h2>
         </div>
-        <Form name="basic" onFinish={onFinish} autoComplete="off">
+        <Form
+          name="basic"
+          onFinish={onFinish}
+          autoComplete="off"
+          className="w-max"
+        >
           <Form.Item
             labelCol={{ span: 24 }} //whole column
             label="Email"
@@ -54,7 +59,7 @@ export default function LoginPage() {
           </Form.Item>
 
           <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
-            <Button type="primary" htmlType="submit" loading={isLoading}>
+            <Button htmlType="submit" loading={isLoading}>
               Đăng nhập
             </Button>
           </Form.Item>

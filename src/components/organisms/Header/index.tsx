@@ -51,7 +51,7 @@ const itemsNav: MenuProps['items'] = [
 
 export default function Header() {
   const handleLogoutUser = () => {
-    localStorage.clear();
+    localStorage.removeItem('access_token');
     window.location.href = '/';
   };
 
