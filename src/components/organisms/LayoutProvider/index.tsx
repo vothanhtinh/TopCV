@@ -5,10 +5,12 @@
 import { usePathname } from 'next/navigation';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import Header from '../Header';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from '@/store/configStore';
+
+// Component
+import Header from '../Header';
 
 const queryClient = new QueryClient();
 

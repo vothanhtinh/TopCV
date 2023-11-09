@@ -27,7 +27,9 @@ body {
 
     :where(.css-dev-only-do-not-override-2i2tap).ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover{
     }
-
+    .ant-btn-primary{
+      background-color: #4096ff;
+    }
     
 }
 

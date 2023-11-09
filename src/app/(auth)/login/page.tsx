@@ -5,13 +5,16 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useLoginUser } from '@/queries/auth';
 import { SidebarRight } from './styled';
-import { isAuthen } from '@/utils';
+import { useRouter } from 'next/navigation';
+import { useSelector } from 'react-redux';
 export default function LoginPage() {
   const { mutation, isLoading } = useLoginUser();
+  const user = useSelector((state: any) => state.userSlice.user);
 
+  const router = useRouter();
   useEffect(() => {
-    if (isAuthen()) {
-      window.location.href = '/';
+    if (user?._id !== '') {
+      router.replace('/');
     }
   }, []);
 

@@ -1,14 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export interface CartState {
-  product: any[];
-  value: number;
-  total: number;
-}
-
 const initialState = {
   // isAuthenticated: false,
-  isAuthenticated: true,
+  isAuthenticated: false,
   isLoading: true,
   isRefreshToken: false,
   errorRefreshToken: '',

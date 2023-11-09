@@ -1,12 +1,6 @@
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+// middleware.ts
+// import localStorage from 'localStorage-ponyfill'
 
-const protectedRoutes = ['/test'];
+import { NextRequest, NextResponse } from 'next/server';
 
-export default function middleware(req: NextRequest) {
-  const isAuthenticated = true;
-  if (isAuthenticated && protectedRoutes.includes(req.nextUrl.pathname)) {
-    const absoluteURL = new URL('/login', req.nextUrl.origin);
-    return NextResponse.redirect(`${absoluteURL.toString()}`);
-  }
-}
+export function middleware(request: NextRequest) {}

@@ -1,9 +1,9 @@
 // Libraries
-import { callRegisterUser, handleLoginUser } from '@/services/auth.api';
 import { useMutation } from '@tanstack/react-query';
 import { message, notification } from 'antd';
 
 // services
+import { callRegisterUser } from '@/services/auth.api';
 
 export const useRegisterUser = () => {
   const mutation = useMutation({

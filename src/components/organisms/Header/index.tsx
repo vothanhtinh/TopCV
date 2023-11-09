@@ -1,14 +1,17 @@
 'use client';
-import { Button, Dropdown, Menu, MenuProps, Space } from 'antd';
+import { Avatar, Dropdown, Menu, MenuProps, Space } from 'antd';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { NavbarItem } from './styled';
-import { isAuthen } from '@/utils';
+import { useDispatch, useSelector } from 'react-redux';
+import { UserOutlined } from '@ant-design/icons';
+import { setLogoutAction } from '@/store/slices/userSlice';
+import { useLogoutUser } from '@/queries/auth/useLogout';
 
 const itemsNav: MenuProps['items'] = [
   {
-    label: 'Việc làm',
+    label: <Link href="/test">Việc làm</Link>,
     key: 'job',
   },
   {
@@ -50,8 +53,12 @@ const itemsNav: MenuProps['items'] = [
 ];
 
 export default function Header() {
+  const dispatch = useDispatch();
+  const { mutation } = useLogoutUser();
+  const user = useSelector((state: any) => state.userSlice.user);
   const handleLogoutUser = () => {
-    localStorage.removeItem('access_token');
+    dispatch(setLogoutAction(''));
+    mutation.mutate();
     window.location.href = '/';
   };
 
@@ -80,8 +87,6 @@ export default function Header() {
   const [current, setCurrent] = useState('');
   const [showManageAccount, setShowManageAccount] = useState(false);
 
-  const isLogin = isAuthen();
-
   const onClick: MenuProps['onClick'] = (e) => {
     setCurrent(e.key);
   };
@@ -103,7 +108,7 @@ export default function Header() {
         className="w-full font-medium"
       />
       <ul className="flex gap-3">
-        {!isLogin ? (
+        {!user?.email ? (
           <>
             <NavbarItem>
               <Link
@@ -118,25 +123,27 @@ export default function Header() {
                 href={'/register'}
                 className="text-white  bg-green-500 hover:opacity-80 "
               >
-                Đăng ký
+                <span>Đăng ký</span>
               </Link>
             </NavbarItem>
           </>
         ) : (
-          <Dropdown menu={{ items }} trigger={['click']}>
-            <Space>
-              {/* <Avatar src={urlAvatar} /> */}
-              {/* {user?.email} */}
-              tinh
-            </Space>
-          </Dropdown>
+          <>
+            <NavbarItem>
+              <Link
+                href={'/'}
+                className="text-white bg-slate-950 hover:opacity-80"
+              >
+                Đăng tuyển hồ sơ
+              </Link>
+            </NavbarItem>
+            <Dropdown menu={{ items }} trigger={['click']}>
+              <Space>
+                <UserOutlined />
+              </Space>
+            </Dropdown>
+          </>
         )}
-
-        <NavbarItem>
-          <Link href={'/'} className="text-white bg-slate-950 hover:opacity-80">
-            Đăng tuyển hồ sơ
-          </Link>
-        </NavbarItem>
       </ul>
     </div>
   );
