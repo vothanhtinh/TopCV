@@ -21,7 +21,8 @@ export const LayoutProvider = ({ children }: { children: React.ReactNode }) => {
       <QueryClientProvider client={queryClient}>
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
-            {pathname !== '/login' && <Header />}
+            {!['/login', '/register'].includes(pathname) &&
+              !pathname.startsWith('/admin') && <Header />}
             {children}
             <ReactQueryDevtools />
           </PersistGate>
